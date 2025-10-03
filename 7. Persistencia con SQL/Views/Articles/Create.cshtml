@@ -1,0 +1,40 @@
+﻿@model Blog.Models.Article
+
+@{
+    ViewData["Title"] = "Create Article";
+}
+
+<h1>Create Article</h1>
+
+<div class="row">
+    <div class="col-md-8">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <form asp-action="Create" method="post">
+            <div class="mb-3">
+                <label asp-for="Title" class="form-label"></label>
+                <input asp-for="Title" class="form-control" maxlength="100" required />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="AuthorName" class="form-label"></label>
+                <input asp-for="AuthorName" class="form-control" required />
+                <span asp-validation-for="AuthorName" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="AuthorEmail" class="form-label"></label>
+                <input asp-for="AuthorEmail" type="email" class="form-control" required />
+                <span asp-validation-for="AuthorEmail" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Content" class="form-label"></label>
+                <textarea asp-for="Content" class="form-control" rows="10" required></textarea>
+                <span asp-validation-for="Content" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Create</button>
+            <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+        </form>
+    </div>
