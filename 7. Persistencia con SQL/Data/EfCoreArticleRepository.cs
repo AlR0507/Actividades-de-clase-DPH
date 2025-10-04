@@ -38,7 +38,18 @@ namespace Blog.Data
 
         public Article Create(Article article)
         {
-            article.PublishedDate = DateTimeOffset.UtcNow;  
+            if (article == null)
+                throw new ArgumentNullException(nameof(article));
+
+            // Asegurar que PublishedDate esté configurado
+            if (article.PublishedDate == default)
+            {
+                article.PublishedDate = DateTimeOffset.UtcNow;
+            }
+
+            // Inicializar la colección de comentarios si es null
+            article.Comments ??= new List<Comment>();
+
             _context.Articles.Add(article);
             _context.SaveChanges();
             return article;
@@ -54,13 +65,19 @@ namespace Blog.Data
 
         public void AddComment(Comment comment)
         {
+            if (comment == null)
+                throw new ArgumentNullException(nameof(comment));
+
             if (!_context.Articles.Any(a => a.Id == comment.ArticleId))
                 throw new ArgumentException("Article does not exist.", nameof(comment));
 
-            comment.PublishedDate = DateTimeOffset.UtcNow;
+            if (comment.PublishedDate == default)
+            {
+                comment.PublishedDate = DateTimeOffset.UtcNow;
+            }
+
             _context.Comments.Add(comment);
             _context.SaveChanges();
         }
-
     }
 }
