@@ -1,0 +1,38 @@
+﻿@model Protegiendo_un_sitio_web.Models.ViewModels.RegisterViewModel
+@{
+	ViewData["Title"] = "Registro";
+}
+<h1>Crear cuenta</h1>
+<form asp-action="Register" method="post">
+	@Html.AntiForgeryToken()
+	<div>
+		<label>Usuario</label>
+		<input asp-for="Username" />
+		<span asp-validation-for="Username"></span>
+	</div>
+	<div>
+		<label>Correo</label>
+		<input asp-for="Email" />
+		<span asp-validation-for="Email"></span>
+	</div>
+	<div>
+		<label>Nombre completo (opcional)</label>
+		<input asp-for="FullName" />
+	</div>
+	<div>
+		<label>Fecha de nacimiento</label>
+		<input asp-for="DateOfBirth" type="date" />
+		<span asp-validation-for="DateOfBirth"></span>
+	</div>
+	<div>
+		<label>Contraseña</label>
+		<input asp-for="Password" type="password" />
+		<span asp-validation-for="Password"></span>
+	</div>
+	<div>
+		<label>Confirmar</label>
+		<input asp-for="ConfirmPassword" type="password" />
+		<span asp-validation-for="ConfirmPassword"></span>
+	</div>
+	<button type="submit">Registrar</button>
+</form>

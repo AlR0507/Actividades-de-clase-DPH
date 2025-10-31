@@ -1,0 +1,19 @@
+﻿@model Protegiendo_un_sitio_web.Models.ViewModels.LoginViewModel
+@{
+	ViewData["Title"] = "Login";
+}
+<h1>Iniciar sesión</h1>
+<form asp-action="Login" method="post">
+	@Html.AntiForgeryToken()
+	<div>
+		<label>Usuario</label>
+		<input asp-for="Username" />
+		<span asp-validation-for="Username"></span>
+	</div>
+	<div>
+		<label>Contraseña</label>
+		<input asp-for="Password" type="password" />
+		<span asp-validation-for="Password"></span>
+	</div>
+	<button type="submit">Entrar</button>
+</form>
