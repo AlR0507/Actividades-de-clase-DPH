@@ -1,0 +1,41 @@
+﻿@{
+	var username = Context.Items["Username"]?.ToString();
+}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>@ViewData["Title"] - WebAuth</title>
+	<link rel="stylesheet" href="~/css/site.css" />
+	<style>
+		body {
+			outline: 3px solid magenta !important
+		}</style>
+
+</head>
+<body>
+	<header>
+		<nav>
+			<a asp-controller="Home" asp-action="Index">Inicio</a>
+			<a asp-controller="Dashboard" asp-action="Index">Zona Segura</a>
+			@if (!string.IsNullOrEmpty(username))
+			{
+				<span>Hola, @username</span>
+				<form asp-controller="Account" asp-action="Logout" method="post" style="display:inline">
+					<button type="submit">Cerrar sesión</button>
+					@Html.AntiForgeryToken()
+				</form>
+			}
+			else
+			{
+				<a asp-controller="Account" asp-action="Login">Iniciar sesión</a>
+				<a asp-controller="Account" asp-action="Register">Registro</a>
+			}
+		</nav>
+	</header>
+	<div class="container">
+		@RenderBody()
+	</div>
+</body>
+</html>
