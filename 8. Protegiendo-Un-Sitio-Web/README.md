@@ -3,4 +3,5 @@
 En NuGet package manager console ejecutar una por una:
 
 Add-Migration Init
+
 Update-Database
